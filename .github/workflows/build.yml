@@ -1,0 +1,40 @@
+name: build
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-python@v2
+    - run: pip install -r requirements.txt
+
+    - run: ADAPTER=sqlite pytest
+
+    - uses: ankane/setup-postgres@v1
+      with:
+        database: tailslide_test
+    - run: ADAPTER=postgresql pytest
+
+    - uses: ankane/setup-mysql@v1
+      with:
+        database: tailslide_test
+      run: |
+        cd /tmp
+        git clone https://github.com/infusion/udf_infusion.git
+        cd udf_infusion
+        ./configure --enable-functions="percentile_cont"
+        make
+        sudo make install
+        mysql -uroot < load.sql
+    - run: ADAPTER=mysql pytest
+
+    - uses: ankane/setup-mariadb@v1
+      with:
+        database: tailslide_test
+    - run: ADAPTER=mariadb pytest
+
+    - uses: ankane/setup-sqlserver@v1
+      with:
+        accept-eula: true
+    - run: sqlcmd -U SA -P 'YourStrong!Passw0rd' -Q 'CREATE DATABASE tailslide_test'
+    - run: ADAPTER=sqlserver pytest

@@ -18,7 +18,7 @@ jobs:
     - uses: ankane/setup-mysql@v1
       with:
         database: tailslide_test
-      run: |
+    - run: |
         cd /tmp
         git clone https://github.com/infusion/udf_infusion.git
         cd udf_infusion

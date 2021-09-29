@@ -39,7 +39,7 @@ Percentile
 ```python
 from tailslide import Percentile
 
-Request.objects.aggregate(Percentile('price', .95))
+Request.objects.aggregate(Percentile('response_time', .95))
 ```
 
 Works with grouping, too, with PostgreSQL, MySQL, and SQLite

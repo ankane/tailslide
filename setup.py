@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='tailslide',
-    version='0.1.0',
+    version='0.1.1',
     description='Median and percentile for Django models and MongoEngine documents',
     url='https://github.com/ankane/tailslide',
     author='Andrew Kane',

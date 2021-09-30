@@ -41,5 +41,3 @@ jobs:
 
     - uses: ankane/setup-mongodb@v1
     - run: pytest tests/mongoengine
-
-    - run: pytest tests/lists

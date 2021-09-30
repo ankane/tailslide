@@ -1,6 +1,6 @@
 # Tailslide
 
-Median and percentile for Django models, MongoEngine documents, and lists
+Median and percentile for Django models and MongoEngine documents
 
 Supports:
 
@@ -29,7 +29,6 @@ For MySQL, also follow [these instructions](#additional-instructions).
 
 - [Django](#django)
 - [MongoEngine](#mongoengine)
-- [Lists](#lists)
 
 ### Django
 
@@ -76,24 +75,6 @@ Percentile
 
 ```python
 Item.objects.percentile('price', .95)
-```
-
-## Lists
-
-Median (use the built-in function)
-
-```python
-from statistics import median
-
-median([1, 2, 3])
-```
-
-Percentile
-
-```python
-from tailside import percentile
-
-percentile([1, 2, 3], 0.95)
 ```
 
 ## Additional Instructions
@@ -149,7 +130,4 @@ ADAPTER=sqlserver pytest tests/django
 
 # MongoDB
 pytest tests/mongoengine
-
-# lists
-pytest tests/lists
 ```

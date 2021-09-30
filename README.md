@@ -107,7 +107,11 @@ To get started with development:
 git clone https://github.com/ankane/tailslide.git
 cd tailslide
 pip install -r requirements.txt
+```
 
+To run the tests:
+
+```sh
 # Postgres
 createdb tailslide_test
 ADAPTER=postgresql pytest tests/django

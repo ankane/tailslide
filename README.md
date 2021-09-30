@@ -1,6 +1,6 @@
 # Tailslide
 
-Median and percentile for Django models
+Median and percentile for Django models, MongoEngine documents, and lists
 
 Supports:
 
@@ -9,6 +9,7 @@ Supports:
 - MariaDB
 - MySQL (with an extension)
 - SQL Server
+- MongoDB
 
 :fire: Uses native functions when possible for blazing performance
 
@@ -25,6 +26,12 @@ pip install tailslide
 For MySQL, also follow [these instructions](#additional-instructions).
 
 ## Getting Started
+
+- [Django](#django)
+- [MongoEngine](#mongoengine)
+- [Lists](#lists)
+
+### Django
 
 Median
 
@@ -46,6 +53,47 @@ Works with grouping, too, with PostgreSQL, MySQL, and SQLite
 
 ```python
 Order.objects.values('store').annotate(total=Median('total')).order_by('store')
+```
+
+### MongoEngine
+
+Add a [custom QuerySet](https://docs.mongoengine.org/guide/querying.html#custom-querysets) to the models where you want to use it.
+
+```python
+from tailslide.mongoengine import TailslideQuerySet
+
+class Item(Document):
+    meta = {'queryset_class': TailslideQuerySet}
+```
+
+Median
+
+```python
+Item.objects.median('price')
+```
+
+Percentile
+
+```python
+Item.objects.percentile('price', .95)
+```
+
+## Lists
+
+Median (use the built-in function)
+
+```python
+from statistics import median
+
+median([1, 2, 3])
+```
+
+Percentile
+
+```python
+from tailside import percentile
+
+percentile([1, 2, 3], 0.95)
 ```
 
 ## Additional Instructions
@@ -81,21 +129,27 @@ pip install -r requirements.txt
 
 # Postgres
 createdb tailslide_test
-ADAPTER=postgresql pytest
+ADAPTER=postgresql pytest tests/django
 
 # SQLite
-ADAPTER=sqlite pytest
+ADAPTER=sqlite pytest tests/django
 
 # MariaDB
 mysqladmin create tailslide_test
-ADAPTER=mariadb pytest
+ADAPTER=mariadb pytest tests/django
 
 # MySQL (install the extension first)
 mysqladmin create tailslide_test
-ADAPTER=mysql pytest
+ADAPTER=mysql pytest tests/django
 
 # SQL Server
 docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=YourStrong!Passw0rd' -p 1433:1433 -d mcr.microsoft.com/mssql/server:2019-latest
 docker exec -it <container-id> /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P YourStrong\!Passw0rd -Q "CREATE DATABASE tailslide_test"
-ADAPTER=sqlserver pytest
+ADAPTER=sqlserver pytest tests/django
+
+# MongoDB
+pytest tests/mongoengine
+
+# lists
+pytest tests/lists
 ```

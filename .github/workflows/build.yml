@@ -8,12 +8,12 @@ jobs:
     - uses: actions/setup-python@v2
     - run: pip install -r requirements.txt
 
-    - run: ADAPTER=sqlite pytest
+    - run: ADAPTER=sqlite pytest tests/django
 
     - uses: ankane/setup-postgres@v1
       with:
         database: tailslide_test
-    - run: ADAPTER=postgresql pytest
+    - run: ADAPTER=postgresql pytest tests/django
 
     - uses: ankane/setup-mysql@v1
       with:
@@ -26,15 +26,20 @@ jobs:
         make
         sudo make install
         mysql -uroot < load.sql
-    - run: ADAPTER=mysql pytest
+    - run: ADAPTER=mysql pytest tests/django
 
     - uses: ankane/setup-mariadb@v1
       with:
         database: tailslide_test
-    - run: ADAPTER=mariadb pytest
+    - run: ADAPTER=mariadb pytest tests/django
 
     - uses: ankane/setup-sqlserver@v1
       with:
         accept-eula: true
     - run: sqlcmd -U SA -P 'YourStrong!Passw0rd' -Q 'CREATE DATABASE tailslide_test'
-    - run: ADAPTER=sqlserver pytest
+    - run: ADAPTER=sqlserver pytest tests/django
+
+    - uses: ankane/setup-mongodb@v1
+    - run: pytest tests/mongoengine
+
+    - run: pytest tests/lists

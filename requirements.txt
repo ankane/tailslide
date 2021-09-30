@@ -1,4 +1,5 @@
 Django
+mongoengine
 mssql-django
 mysqlclient
 psycopg2

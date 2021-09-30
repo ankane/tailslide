@@ -1,6 +1,6 @@
 from .conftest import User
 from django.core.exceptions import FieldError
-from tailslide import Percentile, percentile
+from tailslide import Percentile
 import pytest
 
 
@@ -66,9 +66,3 @@ class TestPercentile:
         with pytest.raises(ValueError) as excinfo:
             User.objects.aggregate(Percentile('visits_count', 'bad'))
         assert 'could not convert string to float' in str(excinfo.value)
-
-    def test_list_even(self):
-        assert 3.25 == percentile([1, 2, 3, 4], .75)
-
-    def test_list_odd(self):
-        assert 29 == percentile([15, 20, 35, 40, 50], .4)

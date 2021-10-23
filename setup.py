@@ -6,7 +6,7 @@ with open('README.md', 'r', encoding='utf-8') as fh:
 setup(
     name='tailslide',
     version='0.1.1',
-    description='Median and percentile for Django models and MongoEngine documents',
+    description='Median and percentile for Django and MongoEngine',
     long_description=long_description,
     long_description_content_type='text/markdown',
     url='https://github.com/ankane/tailslide',

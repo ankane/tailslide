@@ -1,6 +1,6 @@
 # Tailslide
 
-Median and percentile for Django models and MongoEngine documents
+Median and percentile for Django and MongoEngine
 
 Supports:
 

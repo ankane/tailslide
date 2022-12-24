@@ -4,40 +4,42 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-python@v4
-    - run: pip install -r requirements.txt
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+      - run: pip install -r requirements.txt
 
-    - run: ADAPTER=sqlite pytest tests/django
+      - run: ADAPTER=sqlite pytest tests/django
 
-    - uses: ankane/setup-postgres@v1
-      with:
-        database: tailslide_test
-    - run: ADAPTER=postgresql pytest tests/django
+      - uses: ankane/setup-postgres@v1
+        with:
+          database: tailslide_test
+      - run: ADAPTER=postgresql pytest tests/django
 
-    - uses: ankane/setup-mysql@v1
-      with:
-        database: tailslide_test
-    - run: |
-        cd /tmp
-        git clone https://github.com/infusion/udf_infusion.git
-        cd udf_infusion
-        ./configure --enable-functions="percentile_cont"
-        make
-        sudo make install
-        mysql -uroot < load.sql
-    - run: ADAPTER=mysql pytest tests/django
+      - uses: ankane/setup-mysql@v1
+        with:
+          database: tailslide_test
+      - run: |
+          cd /tmp
+          git clone https://github.com/infusion/udf_infusion.git
+          cd udf_infusion
+          ./configure --enable-functions="percentile_cont"
+          make
+          sudo make install
+          mysql -uroot < load.sql
+      - run: ADAPTER=mysql pytest tests/django
 
-    - uses: ankane/setup-mariadb@v1
-      with:
-        database: tailslide_test
-    - run: ADAPTER=mariadb pytest tests/django
+      - uses: ankane/setup-mariadb@v1
+        with:
+          database: tailslide_test
+      - run: ADAPTER=mariadb pytest tests/django
 
-    - uses: ankane/setup-sqlserver@v1
-      with:
-        accept-eula: true
-    - run: sqlcmd -U SA -P 'YourStrong!Passw0rd' -Q 'CREATE DATABASE tailslide_test'
-    - run: ADAPTER=sqlserver pytest tests/django
+      - uses: ankane/setup-sqlserver@v1
+        with:
+          accept-eula: true
+      - run: sqlcmd -U SA -P 'YourStrong!Passw0rd' -Q 'CREATE DATABASE tailslide_test'
+      - run: ADAPTER=sqlserver pytest tests/django
 
-    - uses: ankane/setup-mongodb@v1
-    - run: pytest tests/mongoengine
+      - uses: ankane/setup-mongodb@v1
+      - run: pytest tests/mongoengine

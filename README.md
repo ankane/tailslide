@@ -13,7 +13,7 @@ Supports:
 
 :fire: Uses native functions when possible for blazing performance
 
-[![Build Status](https://github.com/ankane/tailslide/workflows/build/badge.svg?branch=master)](https://github.com/ankane/tailslide/actions)
+[![Build Status](https://github.com/ankane/tailslide/actions/workflows/build.yml/badge.svg)](https://github.com/ankane/tailslide/actions)
 
 ## Installation
 

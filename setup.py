@@ -17,7 +17,7 @@ setup(
         'tailslide',
         'tailslide.mongoengine'
     ],
-    python_requires='>=3.6',
+    python_requires='>=3.8',
     install_requires=[],
     zip_safe=False
 )

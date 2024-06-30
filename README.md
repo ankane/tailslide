@@ -92,6 +92,10 @@ sudo make install
 mysql <options> < load.sql
 ```
 
+## History
+
+View the [changelog](https://github.com/ankane/tailslide/blob/master/CHANGELOG.md)
+
 ## Contributing
 
 Everyone is encouraged to help improve this project. Here are a few ways you can help:

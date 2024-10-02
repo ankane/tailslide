@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tailslide"
+version = "0.2.0"
+description = "Median and percentile for Django and MongoEngine"
+readme = "README.md"
+authors = [
+    {name = "Andrew Kane", email = "andrew@ankane.org"}
+]
+license = {text = "MIT"}
+requires-python = ">= 3.8"
+
+[project.urls]
+Homepage = "https://github.com/ankane/tailslide"

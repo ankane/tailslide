@@ -58,7 +58,7 @@ class TestPercentile:
         assert 'Cannot resolve field "missing"' in str(excinfo.value)
 
     def test_percentile_out_of_range(self):
-        with pytest.raises(ValueError) as excinfo:
+        with pytest.raises(ValueError):
             User.objects.percentile('visits_count', 1.1)
 
     def test_percentile_non_numeric(self):

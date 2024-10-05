@@ -4,7 +4,6 @@ from django.db import connection, migrations, models
 from django.db.migrations.loader import MigrationLoader
 import logging
 import os
-import pytest
 
 if os.environ.get('ADAPTER') == 'sqlite':
     database = {

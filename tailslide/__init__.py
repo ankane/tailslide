@@ -63,7 +63,7 @@ class Percentile(Aggregate):
             self.template = '%(function)s(%(expressions)s, %(percentile100)s)'
 
             # TODO check if extension function exists
-            if not id(connection) in sqlite_cache:
+            if id(connection) not in sqlite_cache:
                 with connection.cursor() as cursor:
                     cursor.connection.create_aggregate('percentile', 2, SQLiteHandler)
                     sqlite_cache.add(id(connection))

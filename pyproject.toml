@@ -22,6 +22,6 @@ dev = [
     "mongoengine",
     "mssql-django",
     "mysqlclient",
-    "psycopg2",
+    "psycopg[binary]",
     "pytest"
 ]

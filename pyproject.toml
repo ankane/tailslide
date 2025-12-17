@@ -15,3 +15,13 @@ requires-python = ">= 3.8"
 
 [project.urls]
 Homepage = "https://github.com/ankane/tailslide"
+
+[dependency-groups]
+dev = [
+    "Django",
+    "mongoengine",
+    "mssql-django",
+    "mysqlclient",
+    "psycopg2",
+    "pytest"
+]

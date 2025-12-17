@@ -1,6 +1,0 @@
-Django
-mongoengine
-mssql-django
-mysqlclient
-psycopg2
-pytest

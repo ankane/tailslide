@@ -20,7 +20,10 @@ elif os.environ.get('ADAPTER') == 'sqlserver':
         'ENGINE': 'mssql',
         'NAME': 'tailslide_test',
         'USER': 'SA',
-        'PASSWORD': 'YourStrong!Passw0rd'
+        'PASSWORD': 'YourStrong!Passw0rd',
+        'OPTIONS': {
+            'extra_params': 'TrustServerCertificate=yes'
+        }
     }
 else:
     database = {

@@ -28,7 +28,7 @@ jobs:
           ./configure --enable-functions="percentile_cont"
           make
           sudo make install
-          mysql -uroot < load.sql
+          mysql < load.sql
       - run: ADAPTER=mysql pytest tests/django
 
       - uses: ankane/setup-mariadb@v1
